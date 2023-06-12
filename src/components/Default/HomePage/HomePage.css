@@ -1,0 +1,36 @@
+.CenterContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.HomePage a {
+    color: white !important;
+    font-size: 24px;
+    max-width: 300px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.HomePage { 
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.ButtonShop {
+    height: 45px;
+    width: 200px;
+    border: 0px;
+    font-size: 20px;
+    margin-top: 2rem;
+    color: white;
+    text-decoration: none; 
+}
+
+.ButtonShop:hover {
+    background-color: #589413;
+} 
