@@ -11,7 +11,7 @@ const DefaultHeader = () => {
                 <ul className="navbar-text">
                     <li><Link to="/"><a>Главная</a></Link></li>
                     <li><Link to="/"><a>Статьи</a></Link></li>
-                    <li> <Link to="/"><a>Магазин</a></Link></li> 
+                    <li> <Link to="/shop"><a>Магазин</a></Link></li> 
                 </ul>
             </nav>
         </div>

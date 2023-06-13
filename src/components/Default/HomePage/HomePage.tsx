@@ -17,7 +17,7 @@ const HomePage = () => {
                                       </a>
                                 <Link to="/">
                                     <Button className="ButtonShop">
-                                        Shop now!
+                                        Магазин
                                     </Button>
                                 </Link>
                             </div>
@@ -30,8 +30,7 @@ const HomePage = () => {
                     </Row>
                 </div>
             </div> 
-        </div>
-       
+        </div> 
     );
 }
 export default HomePage;

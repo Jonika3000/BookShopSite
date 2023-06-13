@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+
+.CenterContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.Page{
+    min-height: 100vh;
+}
+.Categories{
+    font-family: 'Marck Script', cursive;
+    color: white;
+    font-size: 28px;
+}
+.Categories ul{
+    list-style: none;
+    padding: 0px;
+}
+.Content{
+    margin-top: 3rem !important;
+}
