@@ -37,9 +37,25 @@ export interface IPublishingHouseGet {
     description: string,
     image: string
 }
+export interface IBlog{
+    Id:number,
+    Title:string,
+    Content:string
+}
 export interface ICategory {
     id: number,
     name: string,
     description: string, 
     slug: string
+}
+export interface IBookGet {
+    id: number,
+    name: string,
+    description: string,
+    image: File | null,
+    pageCount: string,
+    price: string,
+    categoryId: string,
+    publishingHouseId: string,
+    authorId: string
 }
