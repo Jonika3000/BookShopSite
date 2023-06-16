@@ -33,8 +33,7 @@
     height: 100%;
     padding: 20px;
 }
-.details {
-    border: 1.5px solid grey;
+.details { 
     color: #212121;
     width: 100%;
     height: auto;

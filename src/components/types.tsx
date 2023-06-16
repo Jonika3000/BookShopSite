@@ -42,6 +42,11 @@ export interface IBlog{
     Title:string,
     Content:string
 }
+export interface IBlogGet {
+    id: number,
+    title: string,
+    content: string
+}
 export interface ICategory {
     id: number,
     name: string,

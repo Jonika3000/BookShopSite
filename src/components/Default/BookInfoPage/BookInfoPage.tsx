@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DefaultHeader from "../DefaultHeader/DefaultHeader";
@@ -21,7 +21,9 @@ interface IBookGet {
     categoryId: string,
     publishingHouseId: string,
     idAuthor: string,
-    authorName: string
+    authorName: string,
+    houseName:string,
+    houseId:string
 }
 const BookPage = () => {
     const { id } = useParams<RouteParams>();
@@ -36,15 +38,16 @@ const BookPage = () => {
         categoryId: "",
         publishingHouseId: "",
         idAuthor: "",
-        authorName: ""
+        authorName: "",
+        houseName: "",
+        houseId: ""
     });
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get<IBookGet>(`https://localhost:7190/api/book/getBookById/${id}`);
                 await setBook(response.data);
-                const responseImages = await axios.get<ImagesBook[]>(`https://localhost:7190/api/book/getBookImagesById/${id}`);
-
+                const responseImages = await axios.get<ImagesBook[]>(`https://localhost:7190/api/book/getBookImagesById/${id}`); 
                 await setImages(responseImages.data);
                 console.log(Images);
             }
@@ -67,9 +70,10 @@ const BookPage = () => {
                                 <p><strong>Pages:</strong> {Book.pageCount}</p>
                                 <p><strong>Price:</strong> {Book.price}</p>
                                 <p><strong>Description:</strong> {Book.description}</p>
-                                <p><strong>Author:</strong> {Book.authorName}</p>
+                                <p><strong>Author:</strong> <Link to={`/author/${Book.idAuthor}`}>{Book.authorName}</Link></p>
+                                <p><strong>Publishing House:</strong> <Link to={`/publishingHouse/${Book.houseId}`}>{Book.houseName}</Link></p>
                             </div> 
-                            <Button>Buy now</Button>
+                            <Button><Link to={`/buy/${Book.id}`} className="BuyBtn">Buy now</Link></Button>
                         </div>
                         <div className="col-md-7">
                             <Carousel>
@@ -82,7 +86,7 @@ const BookPage = () => {
                                             style={{ height: '55vh', objectFit: 'cover' }}
                                         />
                                     </Carousel.Item>
-                                ))};
+                                ))}
                             </Carousel>
                         </div>
                     </div>

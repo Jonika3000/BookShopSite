@@ -1,0 +1,15 @@
+.containerBlogs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}  
+.CenterDiv {
+    width: 40%;
+    background-color: #104357;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
