@@ -18,7 +18,7 @@ const AddBlog = () => {
         formData.append('Content', blog.Content); 
         try {
             await http
-                .post<IBlog>("https://localhost:7190/api/blog/create", formData, {
+                .post<IBlog>("/api/blog/create", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }

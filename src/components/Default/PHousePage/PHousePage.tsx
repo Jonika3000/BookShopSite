@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react"; 
 import DefaultHeader from "../DefaultHeader/DefaultHeader";
 import {IPublishingHouseGet } from "../../types";
+import http from "../../../http";
+import { APP_ENV } from "../../../env";
 interface RouteParams {
     [key: string]: string | undefined;
     id: string;
@@ -19,7 +20,7 @@ const PublishingHousePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<IPublishingHouseGet>(`https://localhost:7190/api/PublishingHouses/publishingHouse/${id}`);
+                const response = await http.get<IPublishingHouseGet>(`/api/PublishingHouses/publishingHouse/${id}`);
                 await setHouse(response.data);
             }
             catch (error: any) {
@@ -42,7 +43,7 @@ const PublishingHousePage = () => {
                             </div>
                         </div>
                         <div className="col-md-7">
-                            <img src={`https://localhost:7190/images/${House.image}`}
+                            <img src={`${APP_ENV.BASE_URL}/images/${House.image}`}
                                 style={{ width: "500px", height: "400px", objectFit: "cover", marginLeft: "3rem" }}></img>
                         </div>
                     </div>

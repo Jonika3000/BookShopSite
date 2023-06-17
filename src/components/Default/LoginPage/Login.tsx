@@ -1,9 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import http from "../../../http";
-import { IAuthor } from "../../types";
 import { AuthUserActionType, IUser } from "../Auth/types";
-import jwtDecode from "jwt-decode";  
+import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 export interface ILogin {
@@ -16,7 +15,7 @@ export interface ILoginResult {
 }
 const Login = () => {
     const [validated, setValidated] = useState(false);
-    const navigator = useNavigate(); 
+    const navigator = useNavigate();
     const [initValues, setinitValues] = useState<ILogin>({
         email: "",
         password: ""
@@ -24,7 +23,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const PostDataAsync = async () => {
         http
-            .post<ILoginResult>("https://localhost:7190/api/Auth/login", initValues, {
+            .post<ILoginResult>("/api/Auth/login", initValues, {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -40,9 +39,9 @@ const Login = () => {
                 dispatch({
                     type: AuthUserActionType.LOGIN_USER,
                     payload: {
-                        email: user.email 
+                        email: user.email
                     },
-                }); 
+                });
                 navigator("/");
             });
     }
@@ -54,10 +53,10 @@ const Login = () => {
             setValidated(true);
             return;
         }
-        await PostDataAsync(); 
+        await PostDataAsync();
         form.reset();
         setValidated(false);
-       /*  navigator('/'); */   
+         navigator('/');
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +87,7 @@ const Login = () => {
                         <Form.Control.Feedback type="invalid">
                             Please enter a Email.
                         </Form.Control.Feedback>
-                    </Form.Group> 
+                    </Form.Group>
                     <Form.Group className="mb-3" controlId="formCategoryDescription">
                         <Form.Label style={{
                             color: 'white',
@@ -107,7 +106,7 @@ const Login = () => {
                             Please enter a Password.
                         </Form.Control.Feedback>
                     </Form.Group>
-                    
+
                     <Button className="ButtonAccept" style={{ margin: "0" }} type="submit">Login</Button>
                 </Form>
             </div>

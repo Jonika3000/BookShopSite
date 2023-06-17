@@ -2,7 +2,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import http from "../../../http";
 import { ChangeEvent, useEffect, useState } from "react";
 import { IAuthorGet } from "../../types";
-import axios from "axios";
+
 
 const DeleteAuthor = () => {
     const [validated, setValidated] = useState(false);
@@ -16,7 +16,7 @@ const DeleteAuthor = () => {
         image: ""
     });
     useEffect(() => {
-        axios.get<IAuthorGet[]>('https://localhost:7190/api/author/list')
+        http.get<IAuthorGet[]>('/api/author/list')
             .then(resp => {
                 SetAllItems(resp.data);
             })
@@ -44,7 +44,7 @@ const DeleteAuthor = () => {
     ));
     const DeleteDataAsync = async () => {
         try {
-            await http.delete(`https://localhost:7190/api/author/delete/` + deleteItem.id);
+            await http.delete(`/api/author/delete/` + deleteItem.id);
             SetDeleteItem({
                 id: 0,
                 firstName: "",

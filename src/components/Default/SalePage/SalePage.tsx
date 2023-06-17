@@ -1,9 +1,11 @@
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { IBookGet } from "../../types";
 import DefaultHeader from "../DefaultHeader/DefaultHeader";
+import http from "../../../http";
+import { APP_ENV } from "../../../env";
 interface ISaleData{
       Id: number,
       Address:string,
@@ -49,8 +51,8 @@ const SalePage = () => {
             formData.append('BookId', id);
             formData.append('FullName', sale.FullName);
             formData.append('Email', sale.Email);
-            await axios
-                .post<ISaleData>("https://localhost:7190/api/sales/create", formData, {
+            await http
+                .post<ISaleData>("/api/sales/create", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }
@@ -89,7 +91,7 @@ const SalePage = () => {
         }));
     };
     useEffect(() => {
-        axios.get<IBookGet>(`https://localhost:7190/api/book/getBookById/${id}`, {
+        http.get<IBookGet>(`/api/book/getBookById/${id}`, {
             headers: {
                 "Authorization": `Bearer ${localStorage.token}`
             }
@@ -110,7 +112,7 @@ const SalePage = () => {
                     <div className="text-white">
                         <img
                             className="d-block w-100"
-                            src={`https://localhost:7190/images/${book.image}`} 
+                            src={`${APP_ENV.BASE_URL}/images/${book.image}`} 
                             style={{ height: '40vh', objectFit: 'cover' }}
                         />
                         <p><strong>Name:</strong> {book.name}</p>

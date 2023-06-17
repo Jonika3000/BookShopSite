@@ -1,8 +1,7 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import http from "../../../http";
 import { ChangeEvent, useEffect, useState } from "react";
-import { IBookGet } from "../../types";
-import axios from "axios";
+import { IBookGet } from "../../types"; 
 
 const DeleteBook = () => {
     const [validated, setValidated] = useState(false);
@@ -19,7 +18,7 @@ const DeleteBook = () => {
         authorId: ""
     });
     useEffect(() => {
-        axios.get<IBookGet[]>('https://localhost:7190/api/book/list')
+        http.get<IBookGet[]>('/api/book/list')
             .then(resp => {
                 SetAllItems(resp.data); 
             })
@@ -47,7 +46,7 @@ const DeleteBook = () => {
     ));
     const DeleteDataAsync = async () => {
         try {
-            await http.delete(`https://localhost:7190/api/book/delete/` + deleteItem.id);
+            await http.delete(`/api/book/delete/` + deleteItem.id);
             SetDeleteItem({
                 id: 0,
                 name: "",

@@ -1,8 +1,7 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import http from "../../../http";
 import { ChangeEvent, useEffect, useState } from "react";
-import { IPublishingHouseGet } from "../../types";
-import axios from "axios";
+import { IPublishingHouseGet } from "../../types"; 
 
 const DeletePublishingHouse = () => {
     const [validated, setValidated] = useState(false);
@@ -14,7 +13,7 @@ const DeletePublishingHouse = () => {
         image: ""
     });
     useEffect(() => {
-        axios.get<IPublishingHouseGet[]>('https://localhost:7190/api/PublishingHouses/list')
+        http.get<IPublishingHouseGet[]>('/api/PublishingHouses/list')
             .then(resp => {
                 SetAllItems(resp.data);
             })
@@ -42,7 +41,7 @@ const DeletePublishingHouse = () => {
     ));
     const DeleteDataAsync = async () => {
         try {
-            await http.delete(`https://localhost:7190/api/PublishingHouses/delete/` + deleteItem.id);
+            await http.delete(`/api/PublishingHouses/delete/` + deleteItem.id);
             SetDeleteItem({
                 id: 0,
                 name: "",

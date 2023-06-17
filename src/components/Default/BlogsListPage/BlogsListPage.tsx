@@ -1,15 +1,15 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import DefaultHeader from "../DefaultHeader/DefaultHeader"; 
 import { IBlogGet } from "../../types";
 import "./BlogsListPage.css"
+import http from "../../../http";
 const AllBlogsPage = () => { 
     const [allBlogs, setAllBlogs] = useState<IBlogGet[]>([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<IBlogGet[]>(`https://localhost:7190/api/blog/list`);
+                const response = await http.get<IBlogGet[]>(`/api/blog/list`);
                 await setAllBlogs(response.data);
             }
             catch (error: any) {

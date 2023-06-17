@@ -24,7 +24,7 @@ const AddAuthor = () => {
         }
         try {
             await http
-                .post<IAuthor>("https://localhost:7190/api/author/create", formData, {
+                .post<IAuthor>("/api/author/create", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }

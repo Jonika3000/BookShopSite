@@ -1,9 +1,10 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react"; 
 import DefaultHeader from "../DefaultHeader/DefaultHeader";
 import { Button, Carousel } from "react-bootstrap";
 import "./BookInfoPage.css"
+import http from "../../../http";
+import { APP_ENV } from "../../../env";
 interface RouteParams {
     [key: string]: string | undefined;
     id: string;
@@ -45,9 +46,9 @@ const BookPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<IBookGet>(`https://localhost:7190/api/book/getBookById/${id}`);
+                const response = await http.get<IBookGet>(`/api/book/getBookById/${id}`);
                 await setBook(response.data);
-                const responseImages = await axios.get<ImagesBook[]>(`https://localhost:7190/api/book/getBookImagesById/${id}`); 
+                const responseImages = await http.get<ImagesBook[]>(`/api/book/getBookImagesById/${id}`); 
                 await setImages(responseImages.data);
                 console.log(Images);
             }
@@ -81,7 +82,7 @@ const BookPage = () => {
                                     <Carousel.Item key={item.url}>
                                         <img
                                             className="d-block w-100"
-                                            src={`https://localhost:7190/images/${item.url}`}
+                                            src={`${APP_ENV.BASE_URL}/images/${item.url}`}
                                             alt="Slide"
                                             style={{ height: '55vh', objectFit: 'cover' }}
                                         />

@@ -16,7 +16,7 @@ const HomePage = () => {
                                       </a>
                                 <Link to="/">
                                     <Button className="ButtonShop">
-                                        Магазин
+                                        Shop
                                     </Button>
                                 </Link>
                             </div>

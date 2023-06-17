@@ -2,7 +2,6 @@ import { Button, Form, Modal } from "react-bootstrap";
 import http from "../../../http";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ICategory } from "../../types";
-import axios from "axios";
 
 const DeleteCategory = () => {
     const [validated, setValidated] = useState(false);
@@ -14,7 +13,7 @@ const DeleteCategory = () => {
         slug: ""
     });
     useEffect(() => {
-        axios.get<ICategory[]>('https://localhost:7190/api/category/list')
+        http.get<ICategory[]>('/api/category/list')
             .then(resp => {
                 SetAllItems(resp.data);
             })
@@ -42,7 +41,7 @@ const DeleteCategory = () => {
     ));
     const DeleteDataAsync = async () => {
         try {
-            await http.delete(`https://localhost:7190/api/category/delete/` + deleteItem.id);
+            await http.delete(`/api/category/delete/` + deleteItem.id);
             SetDeleteItem({
                 id: 0,
                 name: "",

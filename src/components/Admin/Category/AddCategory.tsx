@@ -18,7 +18,7 @@ const AddCategory = () => {
         formData.append('Slug', category.slug); 
         try {
             await http
-                .post<IPublishingHouse>("https://localhost:7190/api/category/create", formData, {
+                .post<IPublishingHouse>("/api/category/create", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }

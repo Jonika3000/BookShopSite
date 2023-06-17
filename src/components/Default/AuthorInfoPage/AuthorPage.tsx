@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import DefaultHeader from "../DefaultHeader/DefaultHeader"; 
 import { IAuthorGet } from "../../types";
+import http from "../../../http";
+import { APP_ENV } from "../../../env";
 interface RouteParams {
     [key: string]: string | undefined;
     id: string;
@@ -21,7 +22,7 @@ const AuthorPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<IAuthorGet>(`https://localhost:7190/api/author/authorById/${id}`);
+                const response = await http.get<IAuthorGet>(`/api/author/authorById/${id}`);
                 await setAuthor(response.data); 
             }
             catch (error: any) {
@@ -45,7 +46,7 @@ const AuthorPage = () => {
                             </div> 
                         </div>
                         <div className="col-md-7">
-                            <img src={`https://localhost:7190/images/${Author.image}`}
+                            <img src={`${APP_ENV.BASE_URL}/images/${Author.image}`}
                             style={{width:"500px",height:"400px",objectFit:"cover",marginLeft:"3rem"}}></img>
                         </div>
                     </div>

@@ -33,7 +33,7 @@ const AddBook = () => {
             formData.append('Url', image, image.name);
             formData.append('ItemId', addedItemId.toString());
             try {
-                await http.post('https://localhost:7190/api/book/AddImages', formData, {
+                await http.post('/api/book/AddImages', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -57,7 +57,7 @@ const AddBook = () => {
                 formData.append('Image', book.Image, book.Image.name);
             }
             try {
-                const response = await http.post<IBook>("https://localhost:7190/api/book/create", formData, {
+                const response = await http.post<IBook>("/api/book/create", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }
@@ -116,7 +116,7 @@ const AddBook = () => {
     };
 
     useEffect(() => {
-        http.get<ICategory[]>('https://localhost:7190/api/category/list', {
+        http.get<ICategory[]>('/api/category/list', {
             headers: {
                 "Authorization": `Bearer ${localStorage.token}`
             }
@@ -127,7 +127,7 @@ const AddBook = () => {
             .catch((error) => {
                 console.log(error);
             });
-        http.get<IPublishingHouseGet[]>('https://localhost:7190/api/PublishingHouses/list', {
+        http.get<IPublishingHouseGet[]>('/api/PublishingHouses/list', {
             headers: {
                 "Authorization": `Bearer ${localStorage.token}`
             }
@@ -138,7 +138,7 @@ const AddBook = () => {
             .catch((error) => {
                 console.log(error);
             });
-        http.get<IAuthorGet[]>('https://localhost:7190/api/author/list', {
+        http.get<IAuthorGet[]>('/api/author/list', {
             headers: {
                 "Authorization": `Bearer ${localStorage.token}`
             }

@@ -21,8 +21,11 @@ import DeleteCategory from './components/Admin/Category/DeleteCategory';
 import DeleteBlog from './components/Admin/Blog/DeleteBlog';
 import DeleteAuthor from './components/Admin/Author/DeleteAuthor';
 import DeletePublishingHouse from './components/Admin/PHouse/DeletePHouse';
+import { APP_ENV } from './env';
+import EditAuthor from './components/Admin/Author/EditAuthor';
 
 function App() {
+  console.log(`APP`,APP_ENV.BASE_URL);
   return (
     <>
       <Routes>
@@ -45,8 +48,9 @@ function App() {
             <Route path='DeleteBook' element={<DeleteBook></DeleteBook>}></Route>
             <Route path='DeleteCategory' element={<DeleteCategory></DeleteCategory>}></Route>
             <Route path='DeleteBlog' element={<DeleteBlog></DeleteBlog>}></Route>
-            <Route path='DeleteAuthor' element={<DeleteAuthor></DeleteAuthor>}></Route>
+            <Route path='DeleteAuthor' element={<DeleteAuthor></DeleteAuthor>}></Route> 
             <Route path='DeleteHouse' element={<DeletePublishingHouse></DeletePublishingHouse>}></Route>
+            <Route path='EditAuthor' element={<EditAuthor></EditAuthor>}></Route>
           </Route> 
         </Route> 
       </Routes>

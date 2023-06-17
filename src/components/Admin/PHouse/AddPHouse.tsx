@@ -20,7 +20,7 @@ const AddPublishingHouse = () => {
         }
         try {
             await http
-                .post<IPublishingHouse>("https://localhost:7190/api/PublishingHouses/create", formData, {
+                .post<IPublishingHouse>("/api/PublishingHouses/create", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }

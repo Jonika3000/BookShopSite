@@ -2,10 +2,10 @@ import { Col, Row } from "react-bootstrap";
 import "./ShopPage.css"
 import DefaultHeader from "../DefaultHeader/DefaultHeader";
 import { useEffect, useState } from "react";
-import http from "../../../http";
-import axios from "axios";
+import http from "../../../http"; 
 import { Link, useParams } from "react-router-dom";
 import { IBookGet, ICategory } from "../../types";
+import { APP_ENV } from "../../../env";
 
 interface RouteParams {
     [key: string]: string | undefined;
@@ -19,10 +19,10 @@ const ShopPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<ICategory[]>(`https://localhost:7190/api/Category/list`);
+                const response = await http.get<ICategory[]>(`/api/Category/list`);
                 await setCategories(response.data);
 
-                const responseBooks = await axios.get<IBookGet[]>(`https://localhost:7190/api/Category/category/${slug}`);
+                const responseBooks = await http.get<IBookGet[]>(`/api/Category/category/${slug}`);
                 await setBooks(responseBooks.data);
                 console.log(allBooks);
             }
@@ -55,7 +55,7 @@ const ShopPage = () => {
                                 <div className="Item col-md-3 col-sm-6 col-12" key={item.id}>
                                     <div className="card mx-auto col-10 mt-3">
                                         <img className='img-thumbnail'
-                                            src={`https://localhost:7190/images/${item.image}`}
+                                            src={`${APP_ENV.BASE_URL}/images/${item.image}`}
                                             width="auto" height="auto" />
                                         <div className="card-body text-center mx-auto">
                                             <div className='cvp'>

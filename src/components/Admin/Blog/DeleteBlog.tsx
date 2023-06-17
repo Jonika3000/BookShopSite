@@ -1,8 +1,7 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import http from "../../../http";
 import { ChangeEvent, useEffect, useState } from "react";
-import { IBlogGet } from "../../types";
-import axios from "axios";
+import { IBlogGet } from "../../types"; 
 
 const DeleteBlog = () => {
     const [validated, setValidated] = useState(false);
@@ -13,7 +12,7 @@ const DeleteBlog = () => {
         content: "" 
     });
     useEffect(() => {
-        axios.get<IBlogGet[]>('https://localhost:7190/api/blog/list')
+        http.get<IBlogGet[]>('/api/blog/list')
             .then(resp => {
                 SetAllItems(resp.data);
             })
@@ -41,7 +40,7 @@ const DeleteBlog = () => {
     ));
     const DeleteDataAsync = async () => {
         try {
-            await http.delete(`https://localhost:7190/api/blog/delete/` + deleteItem.id);
+            await http.delete(`/api/blog/delete/` + deleteItem.id);
             SetDeleteItem({
                 id: 0,
                 title: "",

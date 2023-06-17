@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import DefaultHeader from "../DefaultHeader/DefaultHeader";
 import { IBlogGet } from "../../types";
 import parse from 'html-react-parser';
+import http from "../../../http";
 interface RouteParams {
     [key: string]: string | undefined;
     id: string;
@@ -18,7 +18,7 @@ const BlogPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<IBlogGet>(`https://localhost:7190/api/blog/blog/${id}`);
+                const response = await http.get<IBlogGet>(`/api/blog/blog/${id}`);
                 await setBlog(response.data);
             }
             catch (error: any) {
