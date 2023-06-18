@@ -57,7 +57,7 @@ export interface IBookGet {
     id: number,
     name: string,
     description: string,
-    image: File | null,
+    image: string,
     pageCount: string,
     price: string,
     categoryId: string,

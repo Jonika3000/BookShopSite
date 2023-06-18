@@ -20,12 +20,14 @@
     justify-content: center;
     align-items: center; 
 }
-
+.ButtonShop a{
+    font-size: 18px;
+}
 .ButtonShop {
     height: 45px;
     width: 200px;
     border: 0px;
-    font-size: 20px;
+    font-size: 14px;
     margin-top: 2rem;
     color: white;
     text-decoration: none; 

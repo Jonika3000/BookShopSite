@@ -23,7 +23,7 @@ const ShopPage = () => {
                 await setCategories(response.data);
 
                 const responseBooks = await http.get<IBookGet[]>(`/api/Category/category/${slug}`);
-                await setBooks(responseBooks.data);
+                await setBooks(responseBooks.data); 
                 console.log(allBooks);
             }
             catch (error: any) {
@@ -41,6 +41,7 @@ const ShopPage = () => {
                     <div className="Categories">
                         <a>Categories:</a>
                         <ul>
+                            <li><Link to={`/category/all`}>All</Link></li>
                             {categories.map((item) => (
                                 <li key={item.id}><Link to={`/category/${item.slug}`}>{item.name}</Link></li>
                             ))}
@@ -69,9 +70,7 @@ const ShopPage = () => {
                                 </div>
                             ))}
                         </div>
-                    </div>
-                    
-
+                    </div> 
                 </Col>
             </Row>
         </div>

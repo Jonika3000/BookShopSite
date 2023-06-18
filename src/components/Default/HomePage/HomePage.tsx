@@ -16,7 +16,7 @@ const HomePage = () => {
                                       </a>
                                 <Link to="/">
                                     <Button className="ButtonShop">
-                                        Shop
+                                        <Link to="/category/all"><a>Shop</a></Link>
                                     </Button>
                                 </Link>
                             </div>

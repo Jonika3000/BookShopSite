@@ -14,6 +14,7 @@ interface ISaleData{
       FullName:string,
       Email:string
 }
+
 interface RouteParams {
     [key: string]: string | undefined;
     id: string;
@@ -26,7 +27,7 @@ const SalePage = () => {
         id: 0,
         name: "",
         description: "",
-        image: null,
+        image: "",
         pageCount: "",
         price: "",
         categoryId: "",

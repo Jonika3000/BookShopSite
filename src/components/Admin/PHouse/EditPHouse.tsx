@@ -1,23 +1,23 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import http from "../../../http";
-import { IBlogGet } from "../../types";
+import {   IPublishingHouseGet } from "../../types";
 import { APP_ENV } from "../../../env";
-import { Editor } from "@tinymce/tinymce-react";
-const EditBlog = () => {
-    const [AllItems, SetAllItems] = useState<IBlogGet[]>([]);
-    const [EditItem, setEditItem] = useState<IBlogGet>({
+const EditHouse = () => {
+    const [AllItems, SetAllItems] = useState<IPublishingHouseGet[]>([]);
+    const [EditItem, setEditItem] = useState<IPublishingHouseGet>({
         id: 0,
-        title: "",
-        content: ""
-    });
-    const [content, setContent] = useState('');
+        name: "",
+        description: "",
+        image: ""
+    }); 
+    const [image, setImage] = useState<File | null>(null);
     const [validated, setValidated] = useState(false);
     const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
 
     useEffect(() => {
         http
-            .get<IBlogGet[]>("/api/blog/list")
+            .get<IPublishingHouseGet[]>("/api/publishingHouse/list")
             .then((response) => {
                 SetAllItems(response.data);
             })
@@ -27,20 +27,24 @@ const EditBlog = () => {
     }, []);
     const EditDataAsync = async () => {
         const formData = new FormData();
-        formData.append("Id", EditItem.id.toString());
-        formData.append("Title", EditItem.title);
-        formData.append("Content", content);
+        formData.append('Id', EditItem.id.toString());
+        formData.append('Name', EditItem.name);
+        formData.append('Description', EditItem.description);
+        if (image != null) {
+            formData.append("Image", image, image.name);
+        }
         try {
             await http
-                .post("/api/blog/edit/" + EditItem.id, formData, {
+                .post("/api/publishingHouse/edit/" + EditItem.id, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }
                 });
             setEditItem({
                 id: 0,
-                title: "",
-                content: ""
+                name: "",
+                description: "",
+                image: ""
             });
             setSelectedItemId(null);
         }
@@ -76,23 +80,25 @@ const EditBlog = () => {
         } else {
             setEditItem({
                 id: 0,
-                title: "",
-                content: ""
+                name: "",
+                description: "",
+                image: ""
             });
         }
     }
-
-
+    function handleImageChange(event: ChangeEvent<HTMLInputElement>): void {
+        const files = event.target.files;
+        if (files && files.length > 0) {
+            setImage(files[0]);
+        }
+    } 
     const dataItems = AllItems.map((item) => {
         return (
             <option key={item.id} value={item.id}>
-                {item.title}
+                {item.name}
             </option>
         );
     });
-    const handleEditorChange = (content: string) => {
-        setContent(content);
-    };
     return (
         <div style={{ minHeight: "100vh" }}>
             <div className="CenterContent">
@@ -102,7 +108,7 @@ const EditBlog = () => {
                             <Form.Label style={{
                                 color: "white",
                                 fontSize: "24px"
-                            }}>Blog</Form.Label>
+                            }}>Publishing House</Form.Label>
                             <Form.Select
                                 aria-label="Item"
                                 onChange={ComboBoxChange}
@@ -113,40 +119,57 @@ const EditBlog = () => {
                                 <option value="">Choose...</option>
                                 {dataItems}
                             </Form.Select>
-                        </Form.Group> 
+                        </Form.Group>
                         <Form.Group>
                             <Form.Label style={{
                                 color: "white",
                                 fontSize: "24px"
-                            }}>Title</Form.Label>
+                            }}>Name</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter item title"
-                                name="title"
-                                value={EditItem.title}
+                                placeholder="Enter item name"
+                                name="name"
+                                value={EditItem.name}
                                 required
                                 onChange={handleChange}
                                 disabled={!selectedItemId}
                             />
                         </Form.Group>
-                        <Form.Label style={{
-                            color: "white",
-                            fontSize: "24px"
-                        }}>Content</Form.Label>
-                        <Editor
-                            disabled={!selectedItemId}
-                            initialValue={EditItem.content}
-                            onEditorChange={handleEditorChange}
-                            apiKey="gbg6w25sopzhl7ee9p2hrjmm5ch3cwawgel5p0fva2ig5rlf"
-                            init={{
-                                height: 500,
-                                plugins: 'link textcolor colorpicker fullscreen',
-                                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright  | forecolor backcolor | fullscreen',
-                                color_picker_callback: function (callback: (arg0: string) => void, value: any) {
-                                    callback('#FF00FF');
-                                }
-                            }}
-                        />
+                        <Form.Group>
+                            <Form.Label style={{
+                                color: "white",
+                                fontSize: "24px"
+                            }}>Description</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter item description"
+                                name="description"
+                                value={EditItem.description}
+                                required
+                                onChange={handleChange}
+                                disabled={!selectedItemId}
+                            />
+                        </Form.Group> 
+                        <Form.Group>
+                            <Form.Label style={{
+                                color: "white",
+                                fontSize: "24px"
+                            }}>Image</Form.Label>
+                            <Form.Control
+                                type="file"
+                                accept="image/png, image/jpeg"
+                                onChange={handleImageChange}
+                            />
+                        </Form.Group>
+                        <div style={{ width: "100%" }}>
+                            {EditItem.image && image == null && (
+                                <img src={`${APP_ENV.BASE_URL}/${EditItem.image}`}
+                                    style={{ width: "100px", height: "100px", margin: "10px" }}></img>
+                            )}
+                            {image != null && (
+                                <img src={URL.createObjectURL(image)} style={{ maxHeight: "100px", maxWidth: "100px", objectFit: "cover" }} />
+                            )}
+                        </div>
                         <Button variant="primary" type="submit">
                             Save
                         </Button>
@@ -157,4 +180,4 @@ const EditBlog = () => {
     );
 };
 
-export default EditBlog;
+export default EditHouse;
