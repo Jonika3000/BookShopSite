@@ -20,18 +20,19 @@ import DeleteBook from './components/Admin/Book/DeleteBook';
 import DeleteCategory from './components/Admin/Category/DeleteCategory';
 import DeleteBlog from './components/Admin/Blog/DeleteBlog';
 import DeleteAuthor from './components/Admin/Author/DeleteAuthor';
-import DeletePublishingHouse from './components/Admin/PHouse/DeletePHouse'; 
+import DeletePublishingHouse from './components/Admin/PHouse/DeletePHouse';
 import EditAuthor from './components/Admin/Author/EditAuthor';
 import EditBlog from './components/Admin/Blog/EditBlog';
 import EditBook from './components/Admin/Book/EditBook';
 import EditCategory from './components/Admin/Category/EditCategory';
 import EditHouse from './components/Admin/PHouse/EditPHouse';
+import AdminPage from './components/Admin/Admin';
 
-function App() { 
+function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<DefaultLayout />}>
+        <Route  path="/" element={<DefaultLayout />}> 
           <Route index element={<HomePage />} />
           <Route path='category/:slug' element={<ShopPage></ShopPage>}></Route>
           <Route path='book/:id' element={<BookPage></BookPage>}></Route>
@@ -41,23 +42,34 @@ function App() {
           <Route path='publishingHouse/:id' element={<PublishingHousePage></PublishingHousePage>}></Route>
           <Route path='login' element={<Login></Login>}></Route>
           <Route path='allBlogs' element={<AllBlogsPage></AllBlogsPage>}></Route>
+          <Route path='*' element={<HomePage></HomePage>} />
           <Route path='/control-panel/' element={<ControlPanelLayout></ControlPanelLayout>}>
-            <Route path='allBlogs' element={<AllBlogsPage></AllBlogsPage>}></Route>
-            <Route path='AddAuthor' element={<AddAuthor></AddAuthor>}></Route>
-            <Route path='AddBlog' element={<AddBlog></AddBlog>}></Route>
-            <Route path='AddHouse' element={<AddPublishingHouse></AddPublishingHouse>}></Route>
-            <Route path='AddBook' element={<AddBook></AddBook>}></Route>
-            <Route path='AddCategory' element={<AddCategory></AddCategory>}></Route>
-            <Route path='DeleteBook' element={<DeleteBook></DeleteBook>}></Route>
-            <Route path='DeleteCategory' element={<DeleteCategory></DeleteCategory>}></Route>
-            <Route path='DeleteBlog' element={<DeleteBlog></DeleteBlog>}></Route>
-            <Route path='DeleteAuthor' element={<DeleteAuthor></DeleteAuthor>}></Route>
-            <Route path='DeleteHouse' element={<DeletePublishingHouse></DeletePublishingHouse>}></Route>
-            <Route path='EditAuthor' element={<EditAuthor></EditAuthor>}></Route>
-            <Route path='EditBlog' element={<EditBlog></EditBlog>}></Route>
-            <Route path='EditBook' element={<EditBook></EditBook>}></Route>
-            <Route path='EditCategory' element={<EditCategory></EditCategory>}></Route>
-            <Route path='EditHouse' element={<EditHouse></EditHouse>}></Route>
+            <Route path='admin' element={<AdminPage></AdminPage>}/>
+            <Route path='book/'>
+              <Route path='AddBook' element={<AddBook></AddBook>}></Route>
+              <Route path='EditBook' element={<EditBook></EditBook>}></Route>
+              <Route path='DeleteBook' element={<DeleteBook></DeleteBook>}></Route>
+            </Route>
+            <Route path='blog/'>
+              <Route path='AddBlog' element={<AddBlog></AddBlog>}></Route>
+              <Route path='EditBlog' element={<EditBlog></EditBlog>}></Route>
+              <Route path='DeleteBlog' element={<DeleteBlog></DeleteBlog>}></Route>
+            </Route>
+            <Route path='author/'>
+              <Route path='AddAuthor' element={<AddAuthor></AddAuthor>}></Route>
+              <Route path='DeleteAuthor' element={<DeleteAuthor></DeleteAuthor>}></Route>
+              <Route path='EditAuthor' element={<EditAuthor></EditAuthor>}></Route> 
+            </Route>
+            <Route path='PublishingHouse/'>
+              <Route path='AddHouse' element={<AddPublishingHouse></AddPublishingHouse>}></Route>
+              <Route path='EditHouse' element={<EditHouse></EditHouse>}></Route>
+              <Route path='DeleteHouse' element={<DeletePublishingHouse></DeletePublishingHouse>}></Route>
+            </Route>
+            <Route path='category/'>
+              <Route path='AddCategory' element={<AddCategory></AddCategory>}></Route>
+              <Route path='DeleteCategory' element={<DeleteCategory></DeleteCategory>}></Route>
+              <Route path='EditCategory' element={<EditCategory></EditCategory>}></Route>
+            </Route>
           </Route>
         </Route>
       </Routes>

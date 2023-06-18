@@ -56,7 +56,7 @@ const Login = () => {
         await PostDataAsync();
         form.reset();
         setValidated(false);
-         navigator('/');
+        navigator('/control-panel/admin');
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

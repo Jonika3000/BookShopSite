@@ -38,13 +38,15 @@ const EditBook = () => {
         formData.append('Price', EditItem.price);
         formData.append('PublishingHouseId', EditItem.publishingHouseId);
         formData.append('AuthorId', EditItem.authorId);
+        if(selectedItemId)
+        formData.append('Id', selectedItemId?.toString());
         formData.append('CategoryId', EditItem.categoryId);
         if (image != null) {
             formData.append("Image", image, image.name);
         }
         try {
             await http
-                .post("/api/book/edit/" + EditItem.id, formData, {
+                .post("/api/book/edit/" + selectedItemId, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }

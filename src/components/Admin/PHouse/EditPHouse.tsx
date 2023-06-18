@@ -17,7 +17,7 @@ const EditHouse = () => {
 
     useEffect(() => {
         http
-            .get<IPublishingHouseGet[]>("/api/publishingHouse/list")
+            .get<IPublishingHouseGet[]>("/api/PublishingHouses/list")
             .then((response) => {
                 SetAllItems(response.data);
             })
@@ -35,7 +35,7 @@ const EditHouse = () => {
         }
         try {
             await http
-                .post("/api/publishingHouse/edit/" + EditItem.id, formData, {
+                .post("/api/PublishingHouses/edit/" + EditItem.id, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }

@@ -31,7 +31,7 @@ const ShopPage = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [slug]);
 
     return (
         <div className="Page">
@@ -41,9 +41,9 @@ const ShopPage = () => {
                     <div className="Categories">
                         <a>Categories:</a>
                         <ul>
-                            <li><Link to={`/category/all`}>All</Link></li>
+                            <li><Link to="/category/all" >All</Link></li>
                             {categories.map((item) => (
-                                <li key={item.id}><Link to={`/category/${item.slug}`}>{item.name}</Link></li>
+                                <li key={item.id}><Link to={`/category/${item.slug}`} >{item.name}</Link></li>
                             ))}
                         </ul>
                     </div>

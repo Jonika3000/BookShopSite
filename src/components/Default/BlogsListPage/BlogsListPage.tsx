@@ -24,7 +24,7 @@ const AllBlogsPage = () => {
             <DefaultHeader></DefaultHeader>
             <div className="containerBlogs">
                 <div className="CenterDiv">
-                    <ul>
+                    <ul style={{ display: "flex", flexDirection: "column", padding: 0 }}>
                         {allBlogs.map((item) => (
                             <li key={item.id}><Link to={`/blog/${item.id}`}>{item.title}</Link></li>
                         ))}

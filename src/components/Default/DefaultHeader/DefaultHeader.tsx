@@ -26,15 +26,26 @@ const DefaultHeader = () => {
                     <li><Link to="/allBlogs"><a>Blogs</a></Link></li>
                     <li><Link to="/category/all"><a>Shop</a></Link></li>
                     {isAuth ? ( 
-                        <li>
-                            <Link 
-                                aria-current="page"
-                                to="/logout"
-                                onClick={logout}
-                            >
-                                Logout
-                            </Link>
-                        </li>
+                        <> 
+                            <li>
+                                <Link
+                                    aria-current="page"
+                                    to="/control-panel/admin" 
+                                >
+                                    Admin
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    aria-current="page"
+                                    to="/logout"
+                                    onClick={logout}
+                                >
+                                    Logout
+                                </Link>
+                            </li>
+                        </>
+                       
                     ):
                     (<></>)}
                 </ul>
